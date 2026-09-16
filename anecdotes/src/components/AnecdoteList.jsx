@@ -3,8 +3,7 @@ import { useEffect } from "react"
 const AnecdoteList = () => {
 	const filter = useAnecdotesFilter()
   const anecdotes = useAnecdotes()
-	const addVotes = useAnecdotesControls().addVotes
-	const initAnecdotes = useAnecdotesControls().initAnecdotes
+	const { addVotes, initAnecdotes } = useAnecdotesControls()
 	useEffect(() => {
 		initAnecdotes()
 	}, [initAnecdotes])
@@ -13,6 +12,7 @@ const AnecdoteList = () => {
 		addVotes(id)
   }
 	console.log('cwj filter:', filter)
+	console.log('cwj anecdotes: ', anecdotes)
 	return (
 		<div>
 			{anecdotes.filter(a => a.content.toLowerCase().includes(filter.toLowerCase())).toSorted((a, b) => b.votes - a.votes).map((anecdote) => (

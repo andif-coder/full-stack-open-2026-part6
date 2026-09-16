@@ -1,11 +1,11 @@
-import { useAnecdotesControls, asObject } from "../store"
+import { useAnecdotesControls } from "../store"
 const AnecdoteForm = () => {
 	const addAs = useAnecdotesControls().addAs
 
 	const newAs = (event) => {
 		event.preventDefault()
 		const content = event.target.anecdote.value
-		addAs(asObject(content))
+		addAs(content)
 		event.target.reset()
 	}
 

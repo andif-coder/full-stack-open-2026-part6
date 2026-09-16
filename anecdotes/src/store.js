@@ -41,7 +41,12 @@ export const useAnecdoteStore = create((set) => ({
 		addVotes: (id) => set(state => ({
 			anecdotes: state.anecdotes.map(as => as.id == id ? { ...as, votes: as.votes + 1 } : as)
 	})),
-		addAs: (as) => set(state => ({ anecdotes: state.anecdotes.concat(as) })),
+		addAs: async (content) => {
+			const newObj = { content, votes: 0 }
+			const response = await anecdotesService.create(newObj)
+			console.log('cwj ', response)
+			set(state => ({ anecdotes: state.anecdotes.concat(response) }))
+		},
 		changeFilter: (f) => set(() => ({ filter: f })),
 		initAnecdotes: async () => {
 			const initialAnecdotes = await anecdotesService.getAll()
