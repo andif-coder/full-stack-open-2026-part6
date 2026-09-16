@@ -1,20 +1,21 @@
 import { create } from 'zustand'
+import anecdotesService from './services/anecdotes'
 
-const anecdotesAtStart = [
-  'Make it work, then make it fast',
-  'There are two hard things in computer science',
-  'Untested code is broken code',
-  'Simplicity is the ultimate sophistication',
-  'Real artists ship code'
-]
+// const anecdotesAtStart = [
+//   'Make it work, then make it fast',
+//   'There are two hard things in computer science',
+//   'Untested code is broken code',
+//   'Simplicity is the ultimate sophistication',
+//   'Real artists ship code'
+// ]
 
-const initialAnecdotes = [
-  { content: "Make it work, then make it fast", id: "5", votes: 0 },
-  { content: "There are two hard things in computer science", id: "4", votes: 1 },
-  { content: "Untested code is broken code", id: "3", votes: 3 },
-  { content: "Simplicity is the ultimate sophistication", id: "2", votes: 5 },
-  { content: "Real artists ship code", id: "1", votes: 7 },
-]
+// const initialAnecdotes = [
+//   { content: "Make it work, then make it fast", id: "5", votes: 0 },
+//   { content: "There are two hard things in computer science", id: "4", votes: 1 },
+//   { content: "Untested code is broken code", id: "3", votes: 3 },
+//   { content: "Simplicity is the ultimate sophistication", id: "2", votes: 5 },
+//   { content: "Real artists ship code", id: "1", votes: 7 },
+// ]
 
 // const anecdotesAtStart = [
 //   'If it hurts, do it more often',
@@ -34,7 +35,7 @@ export const asObject = anecdote => ({
 })
 
 export const useAnecdoteStore = create((set) => ({
-  anecdotes: initialAnecdotes,
+  anecdotes: [],
 	filter: '',
   actions: {
 		addVotes: (id) => set(state => ({
@@ -42,6 +43,10 @@ export const useAnecdoteStore = create((set) => ({
 	})),
 		addAs: (as) => set(state => ({ anecdotes: state.anecdotes.concat(as) })),
 		changeFilter: (f) => set(() => ({ filter: f })),
+		initAnecdotes: async () => {
+			const initialAnecdotes = await anecdotesService.getAll()
+			set(() => ({ anecdotes: initialAnecdotes }))
+		},
 	},
 }))
 

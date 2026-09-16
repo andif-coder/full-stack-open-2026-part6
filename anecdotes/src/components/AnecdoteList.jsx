@@ -1,8 +1,13 @@
 import { useAnecdotes, useAnecdotesControls, useAnecdotesFilter } from "../store"
+import { useEffect } from "react"
 const AnecdoteList = () => {
 	const filter = useAnecdotesFilter()
   const anecdotes = useAnecdotes()
 	const addVotes = useAnecdotesControls().addVotes
+	const initAnecdotes = useAnecdotesControls().initAnecdotes
+	useEffect(() => {
+		initAnecdotes()
+	}, [initAnecdotes])
   const vote = (id) => {
     console.log("vote", id)
 		addVotes(id)
