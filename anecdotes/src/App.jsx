@@ -1,11 +1,19 @@
-import { useAnecdotes } from "./store"
+import { useAnecdotes, useAnecdotesControls, asObject } from "./store"
 
 const App = () => {
   const anecdotes = useAnecdotes()
+	const { addVotes, addAs } = useAnecdotesControls()
 
   const vote = (id) => {
     console.log("vote", id)
+		addVotes(id)
   }
+	const newAs = (event) => {
+		event.preventDefault()
+		const content = event.target.asValue.value
+		addAs(asObject(content))
+		event.target.reset()
+	}
 
   return (
     <div>
@@ -20,11 +28,11 @@ const App = () => {
         </div>
       ))}
       <h2>create new</h2>
-      <form>
+      <form onSubmit={newAs}>
         <div>
-          <input data-testid="new" />
+          <input data-testid="new" name="asValue" />
         </div>
-        <button>create</button>
+        <button type="submit">create</button>
       </form>
     </div>
   )
