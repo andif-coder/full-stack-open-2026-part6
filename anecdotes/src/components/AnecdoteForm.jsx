@@ -4,7 +4,7 @@ const AnecdoteForm = () => {
 
 	const newAs = (event) => {
 		event.preventDefault()
-		const content = event.target.asValue.value
+		const content = event.target.anecdote.value
 		addAs(asObject(content))
 		event.target.reset()
 	}
@@ -14,7 +14,7 @@ const AnecdoteForm = () => {
       <h2>create new</h2>
       <form onSubmit={newAs}>
         <div>
-          <input data-testid="new" name="asValue" />
+          <input data-testid="new" name="anecdote" />
         </div>
         <button type="submit">create</button>
       </form>
