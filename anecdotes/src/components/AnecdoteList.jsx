@@ -1,15 +1,20 @@
 import { useAnecdotes, useAnecdotesControls, useAnecdotesFilter } from "../store"
+import { useNotificationControls } from "../store"
 import { useEffect } from "react"
 const AnecdoteList = () => {
 	const filter = useAnecdotesFilter()
   const anecdotes = useAnecdotes()
 	const { addVotes, initAnecdotes } = useAnecdotesControls()
+	const setMsg = useNotificationControls().setMsg
 	useEffect(() => {
 		initAnecdotes()
 	}, [initAnecdotes])
-  const vote = (id) => {
-    console.log("vote", id)
-		addVotes(id)
+  const vote = (anecdote) => {
+		setMsg(`You voted '${anecdote.content}'`)
+		setTimeout(() => {
+			setMsg('')
+		}, 5000)
+		addVotes(anecdote.id)
   }
 	console.log('cwj filter:', filter)
 	console.log('cwj anecdotes: ', anecdotes)
@@ -20,7 +25,7 @@ const AnecdoteList = () => {
   		    <div>{anecdote.content}</div>
   		    <div>
   		      has {anecdote.votes}
-  		      <button onClick={() => vote(anecdote.id)}>vote</button>
+  		      <button onClick={() => vote(anecdote)}>vote</button>
   		    </div>
   		  </div>
   		))}

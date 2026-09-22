@@ -138,7 +138,7 @@ test.describe("Anecdotes", () => {
     const content = "There are two hard things in computer science"
     await voteButtonFor(page, content).click()
 
-    await expect(page.getByTestId("notification")).toHaveText(`you voted '${content}'`)
+    await expect(page.getByTestId("notification")).toHaveText(`You voted '${content}'`)
     await expect(page.getByTestId("notification")).not.toBeVisible({ timeout: 6000 })
   })
 
