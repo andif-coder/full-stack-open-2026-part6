@@ -1,14 +1,9 @@
 {
   "anecdotes": [
     {
-      "content": "Make it work, then make it fast",
-      "id": "5",
-      "votes": 0
-    },
-    {
       "content": "There are two hard things in computer science",
       "id": "4",
-      "votes": 2
+      "votes": 1
     },
     {
       "content": "Untested code is broken code",

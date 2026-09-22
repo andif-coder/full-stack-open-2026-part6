@@ -4,8 +4,8 @@ import { useEffect } from "react"
 const AnecdoteList = () => {
 	const filter = useAnecdotesFilter()
   const anecdotes = useAnecdotes()
-	const { addVotes, initAnecdotes } = useAnecdotesControls()
-	const setMsg = useNotificationControls().setMsg
+	const { addVotes, initAnecdotes, removeAnecdote } = useAnecdotesControls()
+	const setMsg  = useNotificationControls().setMsg
 	useEffect(() => {
 		initAnecdotes()
 	}, [initAnecdotes])
@@ -16,6 +16,9 @@ const AnecdoteList = () => {
 		}, 5000)
 		addVotes(anecdote.id)
   }
+	const remove = (id) => {
+		removeAnecdote(id)
+	}
 	console.log('cwj filter:', filter)
 	console.log('cwj anecdotes: ', anecdotes)
 	return (
@@ -26,6 +29,7 @@ const AnecdoteList = () => {
   		    <div>
   		      has {anecdote.votes}
   		      <button onClick={() => vote(anecdote)}>vote</button>
+						{anecdote.votes === 0&& <button onClick={() => remove(anecdote.id)}>delete</button>}
   		    </div>
   		  </div>
   		))}

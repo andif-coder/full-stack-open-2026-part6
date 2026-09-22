@@ -32,5 +32,12 @@ const update = async (id, updateObj) => {
 	}
 	return await response.json()
 }
-
-export default { getAll, create, update }
+const remove = async (id) => {
+	const response = await fetch(`${baseUrl}/${id}`, {
+		method: 'DELETE',
+	})
+	if (!response.ok) {
+		throw new Error(`DELETE error: ${response.status} ${response.statusText}`)
+	}
+}
+export default { getAll, create, update, remove }
