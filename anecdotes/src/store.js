@@ -34,17 +34,23 @@ export const asObject = anecdote => ({
   votes: 0
 })
 
-export const useAnecdoteStore = create((set) => ({
+export const useAnecdoteStore = create((set, get) => ({
   anecdotes: [],
 	filter: '',
   actions: {
-		addVotes: (id) => set(state => ({
-			anecdotes: state.anecdotes.map(as => as.id == id ? { ...as, votes: as.votes + 1 } : as)
-	})),
+		addVotes: async (id) => {
+			const a = get().anecdotes.find(a => a.id === id)
+			const updateObj = { ...a, votes: a.votes + 1 }
+			const response = await anecdotesService.update(id, updateObj)
+			console.log('cwj addVotes', response)
+			set(state => ({
+				anecdotes: state.anecdotes.map(as => as.id == id ? response : as)
+			}))
+		},
 		addAs: async (content) => {
 			const newObj = { content, votes: 0 }
 			const response = await anecdotesService.create(newObj)
-			console.log('cwj ', response)
+			console.log('cwj addas', response)
 			set(state => ({ anecdotes: state.anecdotes.concat(response) }))
 		},
 		changeFilter: (f) => set(() => ({ filter: f })),

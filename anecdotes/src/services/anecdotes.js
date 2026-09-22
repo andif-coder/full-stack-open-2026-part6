@@ -19,5 +19,18 @@ const create = async (newObj) => {
 	}
 	return await response.json()
 }
+const update = async (id, updateObj) => {
+	const response = await fetch(`${baseUrl}/${id}`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(updateObj)
+	})
+	if (!response.ok) {
+		throw new Error(`PUT error: ${response.status} ${response.statusText}`)
+	}
+	return await response.json()
+}
 
-export default { getAll, create }
+export default { getAll, create, update }
