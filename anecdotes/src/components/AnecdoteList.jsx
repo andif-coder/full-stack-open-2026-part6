@@ -19,8 +19,8 @@ const AnecdoteList = () => {
 	const remove = (id) => {
 		removeAnecdote(id)
 	}
-	console.log('cwj filter:', filter)
-	console.log('cwj anecdotes: ', anecdotes)
+	// console.log('cwj filter:', filter)
+	// console.log('cwj anecdotes: ', anecdotes)
 	return (
 		<div>
 			{anecdotes.map((anecdote) => (
