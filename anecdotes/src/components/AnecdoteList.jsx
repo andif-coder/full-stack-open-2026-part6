@@ -23,7 +23,7 @@ const AnecdoteList = () => {
 	console.log('cwj anecdotes: ', anecdotes)
 	return (
 		<div>
-			{anecdotes.filter(a => a.content.toLowerCase().includes(filter.toLowerCase())).toSorted((a, b) => b.votes - a.votes).map((anecdote) => (
+			{anecdotes.map((anecdote) => (
   		  <div key={anecdote.id}>
   		    <div>{anecdote.content}</div>
   		    <div>
