@@ -66,4 +66,22 @@ describe('test list', () => {
 		expect(screen.getByText('cwj sort abc')).toBeDefined()
 		expect(screen.getByText('cwj sort abd')).toBeDefined()
 	})
+	test('anecdotes can be voted', async () => {
+		const mockAnecdotes = [
+			{ id: '1', content: 'cwj sort abc', votes: 2 },
+		]
+		anecdotesServices.getAll.mockResolvedValue(mockAnecdotes)
+		anecdotesServices.update.mockResolvedValue({ id: '1', content: 'cwj sort abc', votes: 3 })
+		render(
+			<div>
+				<AnecdoteList />
+			</div>
+		)
+		await screen.findByText('cwj sort abc')
+		const user = userEvent.setup()
+		const voteButton = screen.getByRole('button', { name: 'vote' })
+		await user.click(voteButton)
+		const updatedItem = await screen.findByText(/has\s+3/)
+		expect(updatedItem).toBeDefined()
+	})
 })
