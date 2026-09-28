@@ -20,3 +20,16 @@ export const addAnecdotesToService = async (newObj) => {
 	}
 	return await response.json()
 }
+export const addVote = async (updateAnecdote) => {
+	const response = await fetch(`${baseUrl}/${updateAnecdote.id}`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({...updateAnecdote, votes: updateAnecdote.votes + 1}),
+	})
+	if (!response.ok) {
+		throw new Error(`POST error: ${response.status} ${response.statusText}`)
+	}
+	return await response.json()
+}
