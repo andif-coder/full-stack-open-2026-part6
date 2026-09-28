@@ -2,7 +2,6 @@ import { useAnecdotes, useAnecdotesControls, useAnecdotesFilter } from "../store
 import { useNotificationControls } from "../store"
 import { useEffect } from "react"
 const AnecdoteList = () => {
-	const filter = useAnecdotesFilter()
   const anecdotes = useAnecdotes()
 	const { addVotes, initAnecdotes, removeAnecdote } = useAnecdotesControls()
 	const setMsg  = useNotificationControls().setMsg
