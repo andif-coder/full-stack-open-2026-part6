@@ -37,13 +37,18 @@
     },
     {
       "content": "123123213",
-      "votes": 0,
+      "votes": 1,
       "id": "386203a3-683d-4a6a-910f-e1580607e1b2"
     },
     {
       "content": "111111",
       "votes": 3,
       "id": "5ea9bffd-09b4-4a66-8953-5930b9fa47cd"
+    },
+    {
+      "content": "333333",
+      "votes": 0,
+      "id": "56cf2a9b-2fbb-4713-9ca4-d0f73484cb5a"
     }
   ]
 }

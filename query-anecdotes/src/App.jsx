@@ -9,7 +9,6 @@ const App = () => {
 
   const handleVote = (anecdote) => {
 		addVote(anecdote)
-		showMsg(`You voted '${anecdote.content}'`)
   }
 
 	if (isPending) {
